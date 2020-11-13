@@ -1,0 +1,5 @@
+---
+- hosts: bedrock
+  become: yes
+  roles:
+    - bedrock

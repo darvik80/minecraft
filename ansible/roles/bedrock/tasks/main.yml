@@ -1,0 +1,27 @@
+---
+- name: Create user `minecraft`
+  user:
+    name: minecraft
+    comment: Minecraft
+    uid: 2000
+    group: admin
+- name: Create Bedrock home dir
+  file:
+    path: "/opt/minecraft/bedrock"
+    state: directory
+    recurse: yes
+- name: Install Bedrock Setup & Launch file
+  template:
+    src: "bedrock-launcher.sh.j2"
+    dest: "/opt/minecraft/bedrock/bedrock-launcher.sh"
+- name: Setup Bedrock Service
+  template:
+    src: "minecraft-bedrock.service.j2"
+    dest: "/etc/systemd/system/minecraft-bedrock.service"
+
+- name: Enable Bedrock Services
+  systemd:
+    daemon_reload: true
+    name: minecraft-bedrock
+    enabled: yes
+    state: started

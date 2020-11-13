@@ -1,0 +1,18 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+	config.vm.box = "ubuntu/focal64"
+
+    config.vm.define "ubuntu-minecraft" do |ubuntu_minecraft|
+		ubuntu_minecraft.vm.network "private_network", ip: "192.168.33.12"
+		ubuntu_minecraft.vm.provider "virtualbox" do |vb|
+			vb.name = "ubuntu-minecraft"
+			vb.memory = "2048"
+	    end
+	end
+
+# 	config.vm.provision "ansible" do |ansible|
+# 		ansible.playbook = "playbook.yml"
+# 	end
+end

@@ -1,0 +1,19 @@
+[all:vars]
+bedrock_version="1.16.40.02"
+
+[do]
+main ansible_host=crearts.xyz
+
+[do:vars]
+site=crearts
+
+
+[vagrant]
+main ansible_host=192.168.33.12 ansible_ssh_user='vagrant' ansible_ssh_private_key_file=../vagrant/.vagrant/machines/ubuntu-minecraft/virtualbox/private_key
+
+[vagrant:vars]
+site=local
+
+[bedrock:children]
+do
+vagrant
