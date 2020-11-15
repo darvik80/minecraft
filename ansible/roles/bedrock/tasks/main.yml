@@ -1,4 +1,15 @@
 ---
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+- name: Upgrade the OS (apt-get dist-upgrade)
+  apt:
+    upgrade: dist
+- name: Install a list of packages
+  apt:
+    pkg:
+      - mc
+      - unzip
 - name: Create user `minecraft`
   user:
     name: minecraft
@@ -7,17 +18,29 @@
     group: admin
 - name: Create Bedrock home dir
   file:
-    path: "/opt/minecraft/bedrock"
+    path: "{{ home_folder }}/bedrock"
     state: directory
     recurse: yes
-- name: Install Bedrock Setup & Launch file
+    mode: "u=rwx,g=rwx,o=rwx"
+- name: Install Bedrock Setup file
+  template:
+    src: "bedrock-setup.sh.j2"
+    dest: "{{ home_folder }}/bedrock/bedrock-setup.sh"
+- name: Install Bedrock Launch file
   template:
     src: "bedrock-launcher.sh.j2"
-    dest: "/opt/minecraft/bedrock/bedrock-launcher.sh"
+    dest: "{{ home_folder }}/bedrock/bedrock-launcher.sh"
 - name: Setup Bedrock Service
   template:
     src: "minecraft-bedrock.service.j2"
     dest: "/etc/systemd/system/minecraft-bedrock.service"
+
+- name: Setup server
+  command: "sudo -u minecraft sh {{ home_folder }}/bedrock/bedrock-setup.sh"
+- name: Setup Bedrock properties
+  template:
+    src: "server.properties.j2"
+    dest: "{{ home_folder }}/{{ bedrock_name }}/server.properties"
 
 - name: Enable Bedrock Services
   systemd:

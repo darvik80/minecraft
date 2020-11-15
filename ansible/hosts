@@ -1,5 +1,10 @@
 [all:vars]
+home_folder=/home/minecraft
+
 bedrock_version="1.16.40.02"
+bedrock_name="bedrock-server"
+bedrock_gamemode=survival
+bedrock_difficulty=normal
 
 [do]
 main ansible_host=crearts.xyz
