@@ -6,19 +6,19 @@ bedrock_name="bedrock-server"
 bedrock_gamemode=survival
 bedrock_difficulty=normal
 
-[do]
-main ansible_host=crearts.xyz
+[cloud]
+cloud-server ansible_host=crearts.xyz
 
-[do:vars]
-site=crearts
+[cloud:vars]
+site=local
 
 
 [vagrant]
-main ansible_host=192.168.33.12 ansible_ssh_user='vagrant' ansible_ssh_private_key_file=../vagrant/.vagrant/machines/ubuntu-minecraft/virtualbox/private_key
+vagrant-server ansible_host=192.168.33.12 ansible_ssh_user='vagrant' ansible_ssh_private_key_file=../vagrant/.vagrant/machines/ubuntu-minecraft/virtualbox/private_key
 
 [vagrant:vars]
 site=local
 
 [bedrock:children]
-do
+cloud
 vagrant
