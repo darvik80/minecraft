@@ -1,0 +1,45 @@
+---
+- name: Upgrade the OS (apt-get update upgrade)
+  apt:
+    upgrade: yes
+    update_cache: yes
+- name: Install a list of packages
+  apt:
+    pkg:
+      - mc
+      - unzip
+      - openjdk-8-jdk
+- name: Create user `minecraft`
+  user:
+    name: minecraft
+    comment: Minecraft
+    uid: 2000
+    group: admin
+- name: Create home dir
+  file:
+    path: "{{ home_folder }}/{{ java_edition_setup_folder }}"
+    state: directory
+    recurse: yes
+    mode: "u=rwx,g=rwx,o=rwx"
+- name: Install Setup file
+  template:
+    src: "java-edition-setup.sh.j2"
+    dest: "{{ home_folder }}/{{ java_edition_setup_folder }}/java-edition-setup.sh"
+- name: Install Launch file
+  template:
+    src: "java-edition-launcher.sh.j2"
+    dest: "{{ home_folder }}/{{ java_edition_setup_folder }}/java-edition-launcher.sh"
+- name: Setup Daemon
+  template:
+    src: "minecraft-java.service.j2"
+    dest: "/etc/systemd/system/minecraft-java.service"
+
+- name: Setup Server
+  command: "sudo -u minecraft sh {{ home_folder }}/{{ java_edition_setup_folder }}/java-edition-setup.sh"
+
+- name: Enable Service
+  systemd:
+    daemon_reload: true
+    name: minecraft-java
+    enabled: yes
+    state: started

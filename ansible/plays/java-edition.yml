@@ -1,0 +1,5 @@
+---
+- hosts: java-edition
+  become: yes
+  roles:
+    - java-edition

@@ -1,14 +1,14 @@
 [Unit]
-Description=Minecraft Bedrock server
+Description=Minecraft Java Edition server
 
 [Service]
 User=minecraft
 # The configuration file application.properties should be here:
 #change this to your workspace
-WorkingDirectory={{ home_folder }}/{{ bedrock_name }}
+WorkingDirectory={{ home_folder }}/bedrock-server
 #path to executable.
 #executable is a bash script which calls jar file
-ExecStart=/bin/sh {{ home_folder }}/{{ bedrock_setup_folder }}/bedrock-launcher.sh
+ExecStart=/bin/sh {{ home_folder }}/bedrock/bedrock-launcher.sh
 SuccessExitStatus=143
 TimeoutStopSec=10
 Restart=on-failure

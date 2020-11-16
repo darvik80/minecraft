@@ -1,14 +1,13 @@
 #!/bin/sh
 
-export VERSION={{ bedrock_version }}
+export VERSION={{ java_edition_version }}
 export BASE_FOLDER={{ home_folder }}
-export NAME={{ bedrock_name }}
+export NAME={{ java_edition_name }}
 export BASE_PATH=${BASE_FOLDER}/${NAME}
 
 SERVER_NAME="${NAME}-${VERSION}"
-
 SERVER_FOLDER="${BASE_FOLDER}/${SERVER_NAME}"
-SERVER_URL="https://minecraft.azureedge.net/bin-linux/${SERVER_NAME}.zip"
+SERVER_URL="{{ java_edition_url }}"
 
 if [ ! -d "${SERVER_FOLDER}" ]; then
   echo "Download server from ${SERVER_URL}"

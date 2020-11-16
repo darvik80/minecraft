@@ -16,25 +16,25 @@
     group: admin
 - name: Create Bedrock home dir
   file:
-    path: "{{ home_folder }}/bedrock"
+    path: "{{ home_folder }}/{{ bedrock_setup_folder }}"
     state: directory
     recurse: yes
     mode: "u=rwx,g=rwx,o=rwx"
 - name: Install Bedrock Setup file
   template:
     src: "bedrock-setup.sh.j2"
-    dest: "{{ home_folder }}/bedrock/bedrock-setup.sh"
+    dest: "{{ home_folder }}/{{ bedrock_setup_folder }}/bedrock-setup.sh"
 - name: Install Bedrock Launch file
   template:
     src: "bedrock-launcher.sh.j2"
-    dest: "{{ home_folder }}/bedrock/bedrock-launcher.sh"
+    dest: "{{ home_folder }}/{{ bedrock_setup_folder }}/bedrock-launcher.sh"
 - name: Setup Bedrock Service
   template:
     src: "minecraft-bedrock.service.j2"
     dest: "/etc/systemd/system/minecraft-bedrock.service"
 
 - name: Setup server
-  command: "sudo -u minecraft sh {{ home_folder }}/bedrock/bedrock-setup.sh"
+  command: "sudo -u minecraft sh {{ home_folder }}/{{ bedrock_setup_folder }}/bedrock-setup.sh"
 - name: Setup Bedrock properties
   template:
     src: "server.properties.j2"

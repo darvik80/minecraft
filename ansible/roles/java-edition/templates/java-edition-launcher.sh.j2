@@ -1,8 +1,8 @@
 #!/bin/sh
 
-export VERSION={{ bedrock_version }}
+export VERSION={{ java_edition_version }}
 export BASE_FOLDER={{ home_folder }}
-export NAME={{ bedrock_name }}
+export NAME={{ java_edition_name }}
 export BASE_PATH=${BASE_FOLDER}/${NAME}
 
 SERVER_NAME="${NAME}-${VERSION}"
@@ -13,7 +13,7 @@ then
     echo "Launch server"
     cd "${BASE_PATH}"
     export LD_LIBRARY_PATH="${BASE_PATH}"
-    exec "${BASE_PATH}/bedrock_server"
+    exec "java -Xmx1024M -Xms1024M -jar server.jar nogui"
 else
     echo "Server not found"
 fi

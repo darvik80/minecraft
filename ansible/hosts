@@ -3,8 +3,14 @@ home_folder=/home/minecraft
 
 bedrock_version="1.16.40.02"
 bedrock_name="bedrock-server"
+bedrock_setup_folder="bedrock"
 bedrock_gamemode=survival
 bedrock_difficulty=normal
+
+java_edition_url="https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar"
+java_edition_version="1.16.4"
+java_edition_setup_folder="java-edition"
+java_edition_name="java-edition-server"
 
 [cloud]
 cloud-server ansible_host=crearts.xyz
@@ -20,5 +26,9 @@ vagrant-server ansible_host=192.168.33.12 ansible_ssh_user='vagrant' ansible_ssh
 site=local
 
 [bedrock:children]
+cloud
+vagrant
+
+[java-edition:children]
 cloud
 vagrant
