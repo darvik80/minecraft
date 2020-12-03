@@ -1,7 +1,7 @@
 [all:vars]
 home_folder=/home/minecraft
 
-bedrock_version="1.16.40.02"
+bedrock_version="1.16.101.01"
 bedrock_name="bedrock-server"
 bedrock_setup_folder="bedrock"
 bedrock_gamemode=survival

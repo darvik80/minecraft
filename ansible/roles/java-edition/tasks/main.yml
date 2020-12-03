@@ -34,6 +34,16 @@
     src: "minecraft-java.service.j2"
     dest: "/etc/systemd/system/minecraft-java.service"
 
+- name: Setup Server properties
+  template:
+    src: "server.properties.j2"
+    dest: "{{ home_folder }}/{{ java_edition_setup_folder }}/server.properties"
+
+- name: Setup eula properties
+  template:
+    src: "eula.txt.j2"
+    dest: "{{ home_folder }}/{{ java_edition_setup_folder }}/eula.txt"
+
 - name: Setup Server
   command: "sudo -u minecraft sh {{ home_folder }}/{{ java_edition_setup_folder }}/java-edition-setup.sh"
 

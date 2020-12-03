@@ -18,5 +18,6 @@ if [ ! -d "${SERVER_FOLDER}" ]; then
   unzip "${SERVER_FOLDER}.zip" -d "${SERVER_FOLDER}"
 
   echo "Link to ${NAME}"
+  rm -f "${BASE_PATH}"
   ln -fs "${SERVER_FOLDER}" "${BASE_PATH}"
 fi

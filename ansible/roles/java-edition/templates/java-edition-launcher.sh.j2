@@ -13,7 +13,7 @@ then
     echo "Launch server"
     cd "${BASE_PATH}"
     export LD_LIBRARY_PATH="${BASE_PATH}"
-    exec "java -Xmx1024M -Xms1024M -jar server.jar nogui"
+    exec `java -Xmx1024M -Xms1024M -jar ${SERVER_FOLDER}/server.jar nogui`
 else
     echo "Server not found"
 fi

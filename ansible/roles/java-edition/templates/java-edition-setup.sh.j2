@@ -4,17 +4,20 @@ export VERSION={{ java_edition_version }}
 export BASE_FOLDER={{ home_folder }}
 export NAME={{ java_edition_name }}
 export BASE_PATH=${BASE_FOLDER}/${NAME}
+export SETUP_FOLDER=${BASE_FOLDER}/{{ java_edition_setup_folder }}
 
 SERVER_NAME="${NAME}-${VERSION}"
 SERVER_FOLDER="${BASE_FOLDER}/${SERVER_NAME}"
 SERVER_URL="{{ java_edition_url }}"
 
 if [ ! -d "${SERVER_FOLDER}" ]; then
+  mkdir -p "${SERVER_FOLDER}"
   echo "Download server from ${SERVER_URL}"
-  wget ${SERVER_URL} -O "${SERVER_FOLDER}.zip"
+  wget ${SERVER_URL} -O "${SERVER_FOLDER}/server.jar"
 
-  echo "Unzip server into ${SERVER_FOLDER}"
-  unzip "${SERVER_FOLDER}.zip" -d "${SERVER_FOLDER}"
+  echo "Prepare eula & properties"
+  cp ${SETUP_FOLDER}/eula.txt ${SERVER_FOLDER}/eula.txt
+  cp ${SETUP_FOLDER}/server.properties ${SERVER_FOLDER}/server.properties
 
   echo "Link to ${NAME}"
   ln -fs "${SERVER_FOLDER}" "${BASE_PATH}"

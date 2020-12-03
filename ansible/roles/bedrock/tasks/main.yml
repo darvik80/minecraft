@@ -35,6 +35,7 @@
 
 - name: Setup server
   command: "sudo -u minecraft sh {{ home_folder }}/{{ bedrock_setup_folder }}/bedrock-setup.sh"
+
 - name: Setup Bedrock properties
   template:
     src: "server.properties.j2"

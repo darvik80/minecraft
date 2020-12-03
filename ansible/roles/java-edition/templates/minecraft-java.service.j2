@@ -5,10 +5,10 @@ Description=Minecraft Java Edition server
 User=minecraft
 # The configuration file application.properties should be here:
 #change this to your workspace
-WorkingDirectory={{ home_folder }}/bedrock-server
+WorkingDirectory={{ home_folder }}/{{ java_edition_name }}
 #path to executable.
 #executable is a bash script which calls jar file
-ExecStart=/bin/sh {{ home_folder }}/bedrock/bedrock-launcher.sh
+ExecStart=/bin/sh {{ home_folder }}/{{ java_edition_setup_folder }}/java-edition-launcher.sh
 SuccessExitStatus=143
 TimeoutStopSec=10
 Restart=on-failure
